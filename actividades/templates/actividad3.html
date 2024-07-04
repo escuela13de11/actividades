@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Actividad 3</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .activity {
+            width: 65%;
+            float: left;
+            margin-right: 5%;
+        }
+        .calculator {
+            width: 30%;
+            float: left;
+        }
+        .calculator input {
+            width: 100%;
+        }
+        .calculator button {
+            width: 23%;
+            margin: 1%;
+        }
+    </style>
+    <script>
+        let ventanaPerdidaCount = 0;
+
+        window.onblur = function() {
+            ventanaPerdidaCount++;
+            document.getElementById('ventana_perdida').value = ventanaPerdidaCount;
+        };
+
+        function insert(num) {
+            document.getElementById('calculator-display').value += num;
+        }
+
+        function equal() {
+            let exp = document.getElementById('calculator-display').value;
+            if (exp) {
+                document.getElementById('calculator-display').value = eval(exp);
+            }
+        }
+
+        function clean() {
+            document.getElementById('calculator-display').value = "";
+        }
+
+        function back() {
+            let exp = document.getElementById('calculator-display').value;
+            document.getElementById('calculator-display').value = exp.substring(0, exp.length - 1);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Actividad 3 para {{ username }}</h1>
+        <div class="activity">
+            <form method="post">
+                {% csrf_token %}
+                <div>
+                    <h2>1.- Usá la calculadora para realizar los cálculos.</h2>
+                    <label for="respuesta_1a">a.- ¿Cuál es el resultado de 1 : 10?</label>
+                    <input type="text" class="form-control mb-3" id="respuesta_1a" name="respuesta_1a" required>
+                    
+                    <label for="respuesta_1b">b.- ¿Y de 1 : 100?</label>
+                    <input type="text" class="form-control mb-3" id="respuesta_1b" name="respuesta_1b" required>
+                    
+                    <label for="respuesta_1c">c.- ¿Y de 1 : 1.000?</label>
+                    <input type="text" class="form-control mb-3" id="respuesta_1c" name="respuesta_1c" required>
+                </div>
+
+                <div>
+                    <h2>2.- Usando la calculadora, pero sin oprimir la tecla del punto, buscá una cuenta que dé como resultado:</h2>
+                    <label for="respuesta_2a">a.- 4,2</label>
+                    <input type="text" class="form-control mb-3" id="respuesta_2a" name="respuesta_2a" required>
+                    
+                    <label for="respuesta_2b">b.- 2,5</label>
+                    <input type="text" class="form-control mb-3" id="respuesta_2b" name="respuesta_2b" required>
+                </div>
+
+                <input type="hidden" name="ventana_perdida" id="ventana_perdida" value="0">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+        </div>
+
+        <div class="calculator">
+            <h2>Calculadora</h2>
+            <input type="text" id="calculator-display" class="form-control mb-2" disabled>
+            <div class="d-flex flex-wrap">
+                <button onclick="insert(1)" class="btn btn-secondary">1</button>
+                <button onclick="insert(2)" class="btn btn-secondary">2</button>
+                <button onclick="insert(3)" class="btn btn-secondary">3</button>
+                <button onclick="insert('+')" class="btn btn-secondary">+</button>
+                <button onclick="insert(4)" class="btn btn-secondary">4</button>
+                <button onclick="insert(5)" class="btn btn-secondary">5</button>
+                <button onclick="insert(6)" class="btn btn-secondary">6</button>
+                <button onclick="insert('-')" class="btn btn-secondary">-</button>
+                <button onclick="insert(7)" class="btn btn-secondary">7</button>
+                <button onclick="insert(8)" class="btn btn-secondary">8</button>
+                <button onclick="insert('*')" class="btn btn-secondary">*</button>
+                <button onclick="clean()" class="btn btn-danger">C</button>
+                <button onclick="insert(0)" class="btn btn-secondary">0</button>
+                <button onclick="equal()" class="btn btn-success">=</button>
+                <button onclick="insert('/')" class="btn btn-secondary">/</button>
+                <button onclick="back()" class="btn btn-warning">&#9003;</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

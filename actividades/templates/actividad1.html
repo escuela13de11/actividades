@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Actividad 1</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        var windowBlurCount = 0;
+
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                windowBlurCount++;
+            }
+        });
+
+        function handleSubmit(event) {
+            document.getElementById('ventana_perdida').value = windowBlurCount;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="text-center">
+            <h1 class="display-4">Actividad 1</h1>
+            <p class="lead">Por favor, no uses calculadoras ni abras otras ventanas para buscar respuestas.</p>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Suma las siguientes fracciones:</h5>
+                <form method="post" id="activity-form" onsubmit="handleSubmit(event)">
+                    {% csrf_token %}
+                    <input type="hidden" id="ventana_perdida" name="ventana_perdida" value="0">
+
+                    <div class="form-group">
+                        <p>{{ num1_1 }}/{{ den1_1 }} + {{ num2_1 }}/{{ den2_1 }}</p>
+                        <label for="user_answer_1">Tu respuesta (en forma de fracción, ej. 1/2):</label>
+                        <input type="text" class="form-control" name="user_answer_1" id="user_answer_1" pattern="\d+/\d+" required>
+                        <input type="hidden" name="num1_1" value="{{ num1_1 }}">
+                        <input type="hidden" name="den1_1" value="{{ den1_1 }}">
+                        <input type="hidden" name="num2_1" value="{{ num2_1 }}">
+                        <input type="hidden" name="den2_1" value="{{ den2_1 }}">
+                    </div>
+
+                    <div class="form-group">
+                        <p>{{ num1_2 }}/{{ den1_2 }} + {{ num2_2 }}/{{ den2_2 }}</p>
+                        <label for="user_answer_2">Tu respuesta (en forma de fracción, ej. 1/2):</label>
+                        <input type="text" class="form-control" name="user_answer_2" id="user_answer_2" pattern="\d+/\d+" required>
+                        <input type="hidden" name="num1_2" value="{{ num1_2 }}">
+                        <input type="hidden" name="den1_2" value="{{ den1_2 }}">
+                        <input type="hidden" name="num2_2" value="{{ num2_2 }}">
+                        <input type="hidden" name="den2_2" value="{{ den2_2 }}">
+                    </div>
+
+                    <div class="form-group">
+                        <p>{{ num1_3 }}/{{ den1_3 }} + {{ num2_3 }}/{{ den2_3 }}</p>
+                        <label for="user_answer_3">Tu respuesta (en forma de fracción, ej. 1/2):</label>
+                        <input type="text" class="form-control" name="user_answer_3" id="user_answer_3" pattern="\d+/\d+" required>
+                        <input type="hidden" name="num1_3" value="{{ num1_3 }}">
+                        <input type="hidden" name="den1_3" value="{{ den1_3 }}">
+                        <input type="hidden" name="num2_3" value="{{ num2_3 }}">
+                        <input type="hidden" name="den2_3" value="{{ den2_3 }}">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

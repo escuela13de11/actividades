@@ -1,0 +1,23 @@
+<!-- actividades/templates/actividades/corregir_actividad.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Corregir Actividades</title>
+</head>
+<body>
+    <h1>Corregir Actividades</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% for actividad in actividades %}
+            <h2>Actividad {{ forloop.counter }}</h2>
+            <p>Usuario: {{ actividad.username }}</p>
+            <p>Actividad: {{ actividad.actividad }}</p>
+            <label for="puntaje_{{ forloop.counter }}">Puntaje:</label>
+            <input type="text" name="puntaje" id="puntaje_{{ forloop.counter }}">
+            <label for="comentarios_{{ forloop.counter }}">Comentarios:</label>
+            <textarea name="comentarios" id="comentarios_{{ forloop.counter }}"></textarea>
+            <button type="submit" name="actividad_id" value="{{ forloop.counter0 }}">Corregir</button>
+        {% endfor %}
+    </form>
+</body>
+</html>

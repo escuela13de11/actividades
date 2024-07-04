@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Superuser View</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        table th {
+            background-color: #007bff;
+            color: white;
+        }
+        table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .ventana-perdida {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Respuestas a "Sistema de Numeración" para Corregir</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Actividad</th>
+                <th>Respuesta</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in sistema_numeracion_results %}
+                <tr>
+                    <td>{{ result.usuario }}</td>
+                    <td>{{ result.actividad }}</td>
+                    <td>{{ result.respuesta }}</td>
+                    <td>
+                        <form method="post" action="{% url 'actividades:superuser_view' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="actividad_id" value="{{ result.id }}">
+                            <label for="puntaje_{{ result.id }}">Puntaje:</label>
+                            <input type="text" name="puntaje" id="puntaje_{{ result.id }}">
+                            <label for="comentarios_{{ result.id }}">Comentarios:</label>
+                            <textarea name="comentarios" id="comentarios_{{ result.id }}"></textarea>
+                            <button type="submit">Corregir</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h1>Resultados de todos los usuarios</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Actividad</th>
+                <th>Puntaje</th>
+                <th>Detalles</th>
+                <th>Ventana Perdida</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in all_results %}
+                <tr>
+                    <td>{{ result.usuario }}</td>
+                    <td>{{ result.actividad }}</td>
+                    <td>{{ result.puntaje }}%</td>
+                    <td>{{ result.detalles }}</td>
+                    <td class="ventana-perdida">{{ result.ventana_perdida }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

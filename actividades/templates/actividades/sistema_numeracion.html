@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sistema de numeración</title>
+</head>
+<body>
+    <h1>Sistema de numeración</h1>
+    <p>En un juego de emboque se tiran tapitas en recipientes con diferentes puntajes. Cada jugador debe tirar sus tapitas y por cada una que ingresa al vaso se suma el puntaje indicado.</p>
+    <p>Federico tiró 10 tapitas en 3 vueltas y embocó solamente algunas. En esta tabla se marcó con donde quedaron las tapitas.</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>
+

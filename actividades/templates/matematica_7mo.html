@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Matemática 7mo</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px; /* Ancho máximo del contenido */
+            margin: 0 auto; /* Centrar el contenido */
+        }
+        .list-group-item {
+            background-color: #f8f9fa;
+            color: #007bff;
+        }
+        .list-group-item:hover {
+            background-color: #e2e6ea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bienvenida a la sección de Matemática de 7mo, {{ username }}</h1>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="{% url 'actividades:actividad3' username %}" class="stretched-link">Actividad 1</a>
+            </li>
+            <li class="list-group-item">
+                <a href="{% url 'actividades:multiplos_y_divisores_i' username %}" class="stretched-link">Múltiplos y Divisores I</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Bootstrap JS y dependencias -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

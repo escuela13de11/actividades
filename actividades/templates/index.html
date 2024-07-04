@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Actividades</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+        }
+        li a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        span {
+            margin-left: 10px;
+        }
+        .resultados {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            display: none;
+        }
+    </style>
+    <script>
+        function toggleResultados(actividad) {
+            var resultados = document.getElementById('resultados-' + actividad);
+            resultados.style.display = resultados.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Bienvenida, {{ username }}</h1>
+
+        {% if username == 'superuser' %}
+            <a href="{% url 'actividades:superuser_view' %}?username=superuser">Ver todos los resultados</a>
+        {% endif %}
+
+        <ul>
+            {% if grade == '6to' %}
+                <li>
+                    <a href="{% url 'actividades:actividad1' username %}">Actividad 1</a>
+                    <button onclick="toggleResultados('actividad1')">Mostrar Resultados</button>
+                    <span>Promedio: {{ promedio_actividad1 }}%</span>
+                    <div id="resultados-actividad1" class="resultados">
+                        <ul>
+                            {% for activity in user_activities %}
+                                {% if activity.actividad == 'Actividad 1' %}
+                                    <li>{{ activity.actividad }}: {{ activity.puntaje }}%
+                                        {% if activity.detalles %}
+                                            - {{ activity.detalles }}
+                                        {% endif %}
+                                        {% if activity.ventana_perdida > 0 %}
+                                            <span>| Número de veces que perdiste el enfoque de la ventana durante la actividad: {{ activity.ventana_perdida }}</span>
+                                        {% endif %}
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="{% url 'actividades:actividad2' username %}">Actividad 2</a>
+                    <button onclick="toggleResultados('actividad2')">Mostrar Resultados</button>
+                    <span>Promedio: {{ promedio_actividad2 }}%</span>
+                    <div id="resultados-actividad2" class="resultados">
+                        <ul>
+                            {% for activity in user_activities %}
+                                {% if activity.actividad == 'Actividad 2' %}
+                                    <li>{{ activity.actividad }}: {{ activity.puntaje }}%
+                                        {% if activity.detalles %}
+                                            - {{ activity.detalles }}
+                                        {% endif %}
+                                        {% if activity.ventana_perdida > 0 %}
+                                            <span>| Número de veces que perdiste el enfoque de la ventana durante la actividad: {{ activity.ventana_perdida }}</span>
+                                        {% endif %}
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </li>
+            {% elif grade == '7mo' %}
+                <li>
+                    <a href="{% url 'actividades:actividad3' username %}">Actividad 3</a>
+                    <button onclick="toggleResultados('actividad3')">Mostrar Resultados</button>
+                    <span>Promedio: {{ promedio_actividad3 }}%</span>
+                    <div id="resultados-actividad3" class="resultados">
+                        <ul>
+                            {% for activity in user_activities %}
+                                {% if activity.actividad == 'Actividad 3' %}
+                                    <li>{{ activity.actividad }}: {{ activity.puntaje }}%
+                                        {% if activity.detalles %}
+                                            - {{ activity.detalles }}
+                                        {% endif %}
+                                        {% if activity.ventana_perdida > 0 %}
+                                            <span>| Número de veces que perdiste el enfoque de la ventana durante la actividad: {{ activity.ventana_perdida }}</span>
+                                        {% endif %}
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</body>
+</html>

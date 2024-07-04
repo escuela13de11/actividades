@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Seleccionar Materia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #343a40;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        li a {
+            display: block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        li a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bienvenida, {{ username }}</h1>
+        <h2>Selecciona una materia para {{ grade }} grado:</h2>
+        
+        <ul>
+            {% if grade == '6to' %}
+                <li><a href="{% url 'actividades:matematica_6to' username %}">Matemática</a></li>
+                <li><a href="{% url 'actividades:lengua_6to' username %}">Lengua</a></li>
+            {% elif grade == '7mo' %}
+                <li><a href="{% url 'actividades:matematica_7mo' username %}">Matemática</a></li>
+                <li><a href="{% url 'actividades:lengua_7mo' username %}">Lengua</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</body>
+</html>

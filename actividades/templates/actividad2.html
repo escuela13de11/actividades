@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Actividad 2</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        var windowBlurCount = 0;
+
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                windowBlurCount++;
+                console.log('La ventana ha perdido el enfoque');
+            } else {
+                console.log('La ventana ha recuperado el enfoque');
+            }
+        });
+
+        function actualizarVentanaPerdida() {
+            document.getElementById('ventana_perdida').value = windowBlurCount;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="text-center">
+            <h1 class="display-4">Actividad 2</h1>
+            <p class="lead">Por favor, compara las siguientes fracciones.</p>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <form method="post" id="activity-form" onsubmit="actualizarVentanaPerdida()">
+                    {% csrf_token %}
+
+                    {% for fraccion in fracciones %}
+                        <div class="form-group">
+                            <p>{{ fraccion.0.0 }}/{{ fraccion.0.1 }} comparado con {{ fraccion.1.0 }}/{{ fraccion.1.1 }}</p>
+                            <label for="user_answer_{{ forloop.counter }}">Tu respuesta:</label>
+                            <select class="form-control" name="user_answer_{{ forloop.counter }}" id="user_answer_{{ forloop.counter }}">
+                                <option value="mayor">Mayor</option>
+                                <option value="menor">Menor</option>
+                                <option value="igual">Igual</option>
+                            </select>
+                            <input type="hidden" name="num1_{{ forloop.counter }}" value="{{ fraccion.0.0 }}">
+                            <input type="hidden" name="den1_{{ forloop.counter }}" value="{{ fraccion.0.1 }}">
+                            <input type="hidden" name="num2_{{ forloop.counter }}" value="{{ fraccion.1.0 }}">
+                            <input type="hidden" name="den2_{{ forloop.counter }}" value="{{ fraccion.1.1 }}">
+                        </div>
+                    {% endfor %}
+
+                    <input type="hidden" id="ventana_perdida" name="ventana_perdida" value="0">
+                    <button type="submit" class="btn btn-primary">Enviar a corregir</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

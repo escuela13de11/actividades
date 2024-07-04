@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ actividad.titulo }}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ actividad.titulo }}</h1>
+        <form method="post">
+            {% csrf_token %}
+            
+            <!-- Pregunta 1 -->
+            <div class="question">
+                <p><strong>1. {{ actividad.preguntas.0.texto }}</strong></p>
+                <ul>
+                    {% for opcion in actividad.preguntas.0.opciones %}
+                        <li>
+                            <label>
+                                <input type="checkbox" name="pregunta_1" value="{{ opcion }}" {% if opcion in respuestas.respuestas_1 %}checked{% endif %}>
+                                {{ opcion }}
+                            </label>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <button type="submit" name="submit_1" class="btn btn-primary">Enviar</button>
+                {% if resultados.resultado_1 %}
+                    <p>Resultado: {{ resultados.resultado_1 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Pregunta 2a -->
+            <div class="question">
+                <p><strong>2. {{ actividad.preguntas.1.texto }}</strong></p>
+                <p>a. {{ actividad.preguntas.1.subpreguntas.0.texto }}</p>
+                <label>
+                    Número 1:
+                    <input type="text" name="pregunta_2a_1" value="{{ respuestas.respuesta_2a_1 }}">
+                </label>
+                <label>
+                    Número 2:
+                    <input type="text" name="pregunta_2a_2" value="{{ respuestas.respuesta_2a_2 }}">
+                </label>
+                <button type="submit" name="submit_2a" class="btn btn-primary">Enviar</button>
+                {% if errores.error_message_2a %}
+                    <p>{{ errores.error_message_2a }}</p>
+                {% elif resultados.resultado_2a %}
+                    <p>Resultado: {{ resultados.resultado_2a }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Pregunta 2b -->
+            <div class="question">
+                <p>b. {{ actividad.preguntas.1.subpreguntas.1.texto }}</p>
+                <ul>
+                    {% for opcion in actividad.preguntas.1.subpreguntas.1.opciones %}
+                        <li>
+                            <label>
+                                <input type="checkbox" name="pregunta_2b" value="{{ opcion }}" {% if opcion in respuestas.respuestas_2b %}checked{% endif %}>
+                                {{ opcion }}
+                            </label>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <button type="submit" name="submit_2b" class="btn btn-primary">Enviar</button>
+                {% if resultados.resultado_2b %}
+                    <p>Resultado: {{ resultados.resultado_2b }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Pregunta 3 -->
+            <div class="question">
+                <p><strong>3. {{ actividad.preguntas.2.texto }}</strong></p>
+                <input type="text" name="pregunta_3" value="{{ respuestas.respuesta_3 }}">
+                <button type="submit" name="submit_3" class="btn btn-primary">Enviar</button>
+                {% if errores.error_message_3 %}
+                    <p>{{ errores.error_message_3 }}</p>
+                {% elif resultados.resultado_3 %}
+                    <p>Resultado: {{ resultados.resultado_3 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Pregunta 4 -->
+            <div class="question">
+                <p><strong>4. {{ actividad.preguntas.3.texto }}</strong></p>
+                <label>
+                    Número 1:
+                    <input type="text" name="pregunta_4_1" value="{{ respuestas.respuesta_4.0 }}">
+                </label>
+                <label>
+                    Número 2:
+                    <input type="text" name="pregunta_4_2" value="{{ respuestas.respuesta_4.1 }}">
+                </label>
+                <label>
+                    Número 3:
+                    <input type="text" name="pregunta_4_3" value="{{ respuestas.respuesta_4.2 }}">
+                </label>
+                <button type="submit" name="submit_4" class="btn btn-primary">Enviar</button>
+                {% if errores.error_message_4 %}
+                    <p>{{ errores.error_message_4 }}</p>
+                {% elif resultados.resultado_4 %}
+                    <p>Resultado: {{ resultados.resultado_4 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Pregunta 5 -->
+            <div class="question">
+                <p><strong>5. {{ actividad.preguntas.4.texto }}</strong></p>
+                <ul>
+                    {% for opcion in actividad.preguntas.4.opciones %}
+                        <li>
+                            <label>
+                                <input type="checkbox" name="pregunta_5" value="{{ opcion }}" {% if opcion in respuestas.respuestas_5 %}checked{% endif %}>
+                                {{ opcion }}
+                            </label>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <button type="submit" name="submit_5" class="btn btn-primary">Enviar</button>
+                {% if resultados.resultado_5 %}
+                    <p>Resultado: {{ resultados.resultado_5 }}</p>
+                {% endif %}
+            </div>
+            <!-- Pregunta 6a -->
+            <div class="question">
+                <p><strong>6a. {{ actividad.preguntas.5.subpreguntas.0.texto }}</strong></p>
+                <ul>
+                    {% for opcion in actividad.preguntas.5.subpreguntas.0.opciones %}
+                        <li>
+                            <label>
+                                <input type="checkbox" name="pregunta_6a" value="{{ opcion }}" {% if opcion in respuestas.respuestas_6a %}checked{% endif %}>
+                                {{ opcion }}
+                            </label>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <button type="submit" name="submit_6a" class="btn btn-primary">Enviar</button>
+                {% if resultados.resultado_6a %}
+                    <p>Resultado: {{ resultados.resultado_6a }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Pregunta 6b -->
+            <div class="question">
+                <p><strong>6b. {{ actividad.preguntas.5.subpreguntas.1.texto }}</strong></p>
+                <input type="text" name="pregunta_6b" value="{{ respuestas.respuesta_6b }}">
+                <button type="submit" name="submit_6b" class="btn btn-primary">Enviar</button>
+                {% if resultados.resultado_6b %}
+                    <p>Resultado: {{ resultados.resultado_6b }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Pregunta 7 -->
+            <div class="question">
+                <p><strong>7. {{ actividad.preguntas.6.texto }}</strong></p>
+                <ul>
+                    {% for opcion in actividad.preguntas.6.opciones %}
+                        <li>
+                            <label>
+                                <input type="checkbox" name="pregunta_7" value="{{ opcion }}" {% if opcion in respuestas.respuestas_7 %}checked{% endif %}>
+                                {{ opcion }}
+                            </label>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <button type="submit" name="submit_7" class="btn btn-primary">Enviar</button>
+                {% if resultados.resultado_7 %}
+                    <p>Resultado: {{ resultados.resultado_7 }}</p>
+                {% endif %}
+            </div>
+
+
+            <!-- Pregunta 8 -->
+            <div class="question">
+                <p><strong>8. {{ actividad.preguntas.7.texto }}</strong></p>
+                <ul>
+                    {% for afirmacion in actividad.preguntas.7.afirmaciones %}
+                        <li>
+                            <label>
+                                {{ afirmacion.texto }}:
+                                <select name="pregunta_8">
+                                    <option value="V" {% if respuestas.respuestas_8 == "V" %}selected{% endif %}>V</option>
+                                    <option value="F" {% if respuestas.respuestas_8 == "F" %}selected{% endif %}>F</option>
+                                </select>
+                            </label>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <button type="submit" name="submit_8" class="btn btn-primary">Enviar</button>
+                {% if resultados.resultado_8 %}
+                    <p>Resultado: {{ resultados.resultado_8 }}</p>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</body>
+</html>

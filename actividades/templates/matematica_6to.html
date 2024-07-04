@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Matemática 6to</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            margin-top: 20px;
+        }
+        .card-header {
+            background-color: #007bff;
+            color: white;
+        }
+        .list-group-item {
+            background-color: #f8f9fa;
+            color: #007bff;
+        }
+        .list-group-item:hover {
+            background-color: #e2e6ea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="text-center">
+            <h3 class="display-4">Estás en la sección de Matemática de 6to, {{ username }}</h3>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                Actividades
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <a href="{% url 'actividades:actividad1' username %}" class="stretched-link">Actividad 1</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="{% url 'actividades:actividad2' username %}" class="stretched-link">Actividad 2</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="{% url 'actividades:sistema_numeracion' username %}" class="stretched-link">Sistema de numeración</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
